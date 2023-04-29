@@ -1038,6 +1038,7 @@ on zygote-start && property:ro.crypto.state=unencrypted
     wait_for_prop odsign.verification.done 1
     # A/B update verifier that marks a successful boot.
     exec_start update_verifier_nonencrypted
+    start statsd
     start netd
     start zygote
     start zygote_secondary
@@ -1046,6 +1047,7 @@ on zygote-start && property:ro.crypto.state=unsupported
     wait_for_prop odsign.verification.done 1
     # A/B update verifier that marks a successful boot.
     exec_start update_verifier_nonencrypted
+    start statsd
     start netd
     start zygote
     start zygote_secondary
@@ -1054,6 +1056,7 @@ on zygote-start && property:ro.crypto.state=encrypted && property:ro.crypto.type
     wait_for_prop odsign.verification.done 1
     # A/B update verifier that marks a successful boot.
     exec_start update_verifier_nonencrypted
+    start statsd
     start netd
     start zygote
     start zygote_secondary
@@ -1277,7 +1280,7 @@ on property:ro.debuggable=1
     # Give reads to anyone for the accessibility trace folder on debug builds.
     chmod 0775 /data/misc/a11ytrace
 
-on init && property:ro.debuggable=1 && property:ro.console.enable=1
+on init && property:ro.debuggable=1
     start console
 
 on userspace-reboot-requested
